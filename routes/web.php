@@ -25,3 +25,10 @@ Route::post('/admin/login', [AdminController::class, 'adminLogin'])->name('admin
 
 Route::get('/verify', [AdminController::class, 'showVerification'])->name('custom.verification.form');
 Route::post('/verify', [AdminController::class, 'verificationVerify'])->name('custom.verification.verify');
+
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
+    Route::post('/profile/store', [AdminController::class, 'profileStore'])->name('profile.store');
+});

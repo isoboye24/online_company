@@ -43,7 +43,7 @@ class AdminController extends Controller
     }
 
     public function showVerification(){
-    return view('auth.verify');
+        return view('auth.verify');
     }
       // End Method
 
@@ -58,5 +58,52 @@ class AdminController extends Controller
         }
 
         return back()->withErrors(['code' => 'Invalid Verification Code']);
+    }
+
+    public function adminProfile(){
+        $id = Auth::user()->id;
+        $profileData = User::find($id);
+        return view('admin.admin_profile', compact('profileData'));
+    }
+
+    public function profileStore(Request $request)
+    {
+        $id = Auth::user()->id;
+        $userData = User::find($id);
+
+        $userData->name = $request->name;
+        $userData->email = $request->email;
+        $userData->phone = $request->phone;
+        $userData->address = $request->address;
+
+        $oldPhotoPath = $userData->photo;
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $filename = time().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('upload/user_images'),$filename);
+            $userData->photo = $filename;
+
+            if ($oldPhotoPath && $oldPhotoPath !== $filename) {
+            $this->deleteOldImage($oldPhotoPath);
+            }
+        }
+
+        $userData->save();
+
+        $notification = array(
+            'message' => 'Profile Updated Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
+    private function deleteOldImage(string $oldPhotoPath): void
+    {
+        $fullPath = public_path('upload/user_images/'.$oldPhotoPath);
+        if (file_exists($fullPath)) {
+            unlink($fullPath);
+        }
     }
 }
