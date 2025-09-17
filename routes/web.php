@@ -31,4 +31,5 @@ Route::post('/verify', [AdminController::class, 'verificationVerify'])->name('cu
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
     Route::post('/profile/store', [AdminController::class, 'profileStore'])->name('profile.store');
+    Route::post('/profile/password/update', [AdminController::class, 'passwordUpdate'])->name('admin.password.update');
 });

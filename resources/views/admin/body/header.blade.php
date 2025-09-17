@@ -59,7 +59,9 @@
                                 </div>
                                 <p class="mb-0 user-msg">
                                     <small class="fs-14">Completed <span class="text-reset">Improve workflow in
-                                            Figma</span></small>
+                                            Figma
+                                        </span>
+                                    </small>
                                 </p>
                             </a>
 
@@ -142,10 +144,7 @@
 
                     </div>
                 </li>
-
             </ul>
         </div>
-
     </div>
-
 </div>
