@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,10 +27,13 @@ Route::post('/admin/login', [AdminController::class, 'adminLogin'])->name('admin
 Route::get('/verify', [AdminController::class, 'showVerification'])->name('custom.verification.form');
 Route::post('/verify', [AdminController::class, 'verificationVerify'])->name('custom.verification.verify');
 
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
     Route::post('/profile/store', [AdminController::class, 'profileStore'])->name('profile.store');
     Route::post('/profile/password/update', [AdminController::class, 'passwordUpdate'])->name('admin.password.update');
+});
+
+// REVIEW
+Route::middleware('auth')->prefix('admin/backend')->name('admin.backend.')->group(function () {
+    Route::resource('reviews', ReviewController::class);
 });
