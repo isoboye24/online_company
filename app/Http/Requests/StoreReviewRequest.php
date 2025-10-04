@@ -24,6 +24,8 @@ class StoreReviewRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'position' => ['required', 'string'],
+            'image' => ['nullable', 'string'],
+            'massage' => ['nullable', 'string'],
         ];
     }
 

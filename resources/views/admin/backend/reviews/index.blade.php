@@ -19,7 +19,7 @@
 
 
                     <div class="card-body">
-                        <table id="datatable" class="table table-bordered dt-responsive table-responsive nowrap">
+                        <table id="datatable" class="table table-bordered dt-responsive table-responsive nowrap ">
                             <thead>
                                 <tr>
                                     <!-- <th>Sl</th> -->
@@ -38,10 +38,12 @@
                                     <td>{{ $item->position }}</td>
                                     <td> <img src="{{ asset($item->image) }}" style="width:70px; height:40px;"> </td>
                                     <td>{{ Str::limit($item->message, 50, '...')  }}</td>
-                                    <td>
-                                        <a href="#" class="btn btn-warning btn-sm">Show</a>
-                                        <a href="#" class="btn btn-success btn-sm">Edit</a>
-                                        <a href="#" class="btn btn-danger btn-sm" id="delete">Delete</a>
+                                    <td class="">
+                                        <a href="#" class="btn btn-warning btn-sm"><i class="fa-solid fa-eye"></i></a>
+                                        <a href="#" class="btn btn-success btn-sm"><i
+                                                class="fa-solid fa-pencil"></i></a>
+                                        <a href="#" class="btn btn-danger btn-sm" id="delete"><i
+                                                class="fa-solid fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
