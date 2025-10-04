@@ -40,8 +40,8 @@
                                     <td>{{ Str::limit($item->message, 50, '...')  }}</td>
                                     <td class="">
                                         <a href="#" class="btn btn-warning btn-sm"><i class="fa-solid fa-eye"></i></a>
-                                        <a href="#" class="btn btn-success btn-sm"><i
-                                                class="fa-solid fa-pencil"></i></a>
+                                        <a href="{{route('admin.backend.reviews.edit', $item->id)}}"
+                                            class="btn btn-success btn-sm"><i class="fa-solid fa-pencil"></i></a>
                                         <a href="#" class="btn btn-danger btn-sm" id="delete"><i
                                                 class="fa-solid fa-trash"></i></a>
                                     </td>

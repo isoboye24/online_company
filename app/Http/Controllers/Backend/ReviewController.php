@@ -57,12 +57,48 @@ class ReviewController extends Controller
 
     }
 
-    public function edit(){
-
+    public function edit($id){
+        $review = Review::find($id);
+        return view('admin/backend/reviews.edit', compact('review'));
     }
 
-    public function update(){
+    public function update(Request $request){
+        $review_id = $request->id;
 
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $manager = new ImageManager(new Driver());
+            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            $img = $manager->read($image);
+            $img->resize(60,60)->save(public_path('upload/review/'.$name_gen));
+            $save_url = 'upload/review/'.$name_gen;
+
+            Review::find($review_id)->update([
+                'name' => $request->name,
+                'position' => $request->position,
+                'message' => $request->message,
+                'image' => $save_url ?? 'upload/no_image.jpg',
+            ]);
+
+            $notification = array(
+                'message' => 'Review Updated Successfully',
+                'alert-type' => 'success'
+            );
+        }
+        else{
+            Review::find($review_id)->update([
+                'name' => $request->name,
+                'position' => $request->position,
+                'message' => $request->message,
+            ]);
+
+            $notification = array(
+                'message' => 'Review Updated without Successfully',
+                'alert-type' => 'success'
+            );
+        }
+
+        return redirect()->route('admin.backend.reviews.index')->with($notification);
     }
 
     public function delete(){
