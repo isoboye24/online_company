@@ -101,7 +101,28 @@ class ReviewController extends Controller
         return redirect()->route('admin.backend.reviews.index')->with($notification);
     }
 
-    public function delete(){
+    public function destroy($id)
+    {
+        $item = Review::find($id);
 
+        if (!$item) {
+            return redirect()->route('admin.backend.reviews.index')->with([
+                'message' => 'Review not found',
+                'alert-type' => 'error'
+            ]);
+        }
+
+        // Delete image safely
+        if ($item->image && file_exists(public_path($item->image))) {
+            unlink(public_path($item->image));
+        }
+
+        $item->delete();
+
+        return redirect()->route('admin.backend.reviews.index')->with([
+            'message' => 'Review deleted successfully',
+            'alert-type' => 'success'
+        ]);
     }
+
 }

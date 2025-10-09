@@ -34,6 +34,16 @@ Route::middleware('auth')->group(function () {
 });
 
 // REVIEW
-Route::middleware('auth')->prefix('admin/backend')->name('admin.backend.')->group(function () {
-    Route::resource('reviews', ReviewController::class);
-});
+// Route::middleware('auth')->prefix('admin/backend')->name('admin.backend.')->group(function () {
+//     Route::resource('reviews', ReviewController::class);
+// });
+
+Route::middleware('auth')->prefix('admin/backend/reviews')->name('admin.backend.reviews.')->group(function () {
+        Route::get('/', [ReviewController::class, 'index'])->name('index');
+        Route::get('/create', [ReviewController::class, 'create'])->name('create');
+        Route::post('/', [ReviewController::class, 'store'])->name('store');
+        Route::get('/{review}', [ReviewController::class, 'show'])->name('show');
+        Route::get('/{review}/edit', [ReviewController::class, 'edit'])->name('edit');
+        Route::put('/{review}', [ReviewController::class, 'update'])->name('update');
+        Route::delete('/{review}', [ReviewController::class, 'destroy'])->name('destroy');
+    });

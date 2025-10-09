@@ -42,8 +42,15 @@
                                         <a href="#" class="btn btn-warning btn-sm"><i class="fa-solid fa-eye"></i></a>
                                         <a href="{{route('admin.backend.reviews.edit', $item->id)}}"
                                             class="btn btn-success btn-sm"><i class="fa-solid fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger btn-sm" id="delete"><i
-                                                class="fa-solid fa-trash"></i></a>
+                                        <form action="{{ route('admin.backend.reviews.destroy', $item->id) }}"
+                                            method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm" id="delete">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </form>
+
                                     </td>
                                 </tr>
                                 @endforeach
