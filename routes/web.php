@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\ReviewController;
+use App\Http\Controllers\Backend\SliderController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -33,7 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/password/update', [AdminController::class, 'passwordUpdate'])->name('admin.password.update');
 });
 
-// REVIEW
+// BACKEND CONTROLLERS' LINKS
 Route::middleware('auth')->prefix('admin/backend')->name('admin.backend.')->group(function () {
      Route::resource('reviews', ReviewController::class);
- });
+     Route::resource('sliders', SliderController::class);
+});

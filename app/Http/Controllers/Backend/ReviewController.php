@@ -13,11 +13,11 @@ class ReviewController extends Controller
 {
     public function index(){
         $reviews = Review::latest()->get();
-        return view('admin/backend/reviews.index', compact('reviews'));
+        return view('admin.backend.reviews.index', compact('reviews'));
     }
 
     public function create(){
-        return view('admin/backend/reviews.create');
+        return view('admin.backend.reviews.create');
     }
 
     public function store(Request $request){
@@ -48,13 +48,7 @@ class ReviewController extends Controller
                     'alert-type' => 'warning'
                 );
         }
-
-
         return redirect()->route('admin.backend.reviews.index')->with($notification);
-    }
-
-    public function show(){
-
     }
 
     public function edit($id){
