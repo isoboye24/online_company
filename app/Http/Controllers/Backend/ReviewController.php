@@ -58,6 +58,7 @@ class ReviewController extends Controller
 
     public function update(Request $request){
         $review_id = $request->id;
+        $item = Review::find($review_id);
 
         if ($request->file('image')) {
             $image = $request->file('image');
@@ -66,6 +67,11 @@ class ReviewController extends Controller
             $img = $manager->read($image);
             $img->resize(60,60)->save(public_path('upload/review/'.$name_gen));
             $save_url = 'upload/review/'.$name_gen;
+
+            // Delete image safely
+            if ($item->image && file_exists(public_path($item->image))) {
+                unlink(public_path($item->image));
+            }
 
             Review::find($review_id)->update([
                 'name' => $request->name,

@@ -24,8 +24,8 @@
                                 <tr>
                                     <!-- <th>Sl</th> -->
                                     <th>Title</th>
-                                    <th>Description</th>
                                     <th>Image</th>
+                                    <th>Description</th>
                                     <th>Link</th>
                                     <th>Action</th>
                                 </tr>
@@ -35,8 +35,8 @@
                                 <tr>
                                     <!-- <td>{{ $key+1 }}</td> -->
                                     <td>{{ $item->title }}</td>
-                                    <td>{{ $item->description }}</td>
                                     <td> <img src="{{ asset($item->image) }}" style="width:70px; height:40px;"> </td>
+                                    <td>{{ Str::limit($item->description, 50, '...')  }}</td>
                                     <td>{{ $item->link }}</td>
                                     <td class="">
                                         <a href="#" class="btn btn-warning btn-sm"><i class="fa-solid fa-eye"></i></a>
