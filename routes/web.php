@@ -39,3 +39,7 @@ Route::middleware('auth')->prefix('admin/backend')->name('admin.backend.')->grou
      Route::resource('reviews', ReviewController::class);
      Route::resource('sliders', SliderController::class);
 });
+
+Route::middleware('auth')->group(function () {
+    Route::post('/edit-slider/{id}', [SliderController::class, 'editSlider']);
+});
